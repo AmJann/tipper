@@ -1,4 +1,5 @@
 import { React, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function HomePage() {
     const [user,setUser] = useState('contributer7')
@@ -45,20 +46,24 @@ const handleSearchChange = (e) => {
   return (
     <div>
     <header>
-        <div>
-        <h3>Tipper | {user}</h3>
+        <div className='loginHeader'>
+            <div>
+            <h3><span className='Tipper'>Tipper</span> {user ? <Link className='userHeader' to='*'><span className='divider'>|</span> {user}</Link> : ''}</h3>
+            </div>
+            <div>
+            {isLoggedIn?<Link to='*'><h3>Logout</h3></Link> : <Link to='*'><h3>Login/Sign-up</h3></Link> }
+            </div>
         </div>
-        <div>
-        {isLoggedIn?<h3>Logout</h3>:<h3>Sign-up | Login</h3>}
-        </div>
+        <div className='searchBar' >
         <input
         type="text"
         placeholder="Search by Address"
         value={searchTerm}
         onChange={handleSearchChange}
       />
+      </div>
     </header>
-    <div>
+    <div className='table'>
 
       <table>
         <thead>
@@ -87,7 +92,12 @@ const handleSearchChange = (e) => {
         </tbody>
       </table>
     </div>
-
+<div className='reviewPaginationFooter'>
+    <div>
+        <Link to='*'>Add Review</Link>
+    </div>
+    <div>pagination</div>
+</div>
 </div>
   )
 }

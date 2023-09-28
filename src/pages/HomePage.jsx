@@ -1,9 +1,10 @@
 import { React, useState } from 'react'
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomePage() {
     const [user,setUser] = useState('contributer7')
-    const [isLoggedIn, setIsLoggedIn] =useState(false)
+    const [isLoggedIn, setIsLoggedIn] =useState(true)
     const [searchTerm, setSearchTerm] = useState('');
 
 let data = [
@@ -34,6 +35,15 @@ let data = [
         user: 'contributer7',
         post: 'horrible tipper, well she is a baby'  
     },
+    {
+        first_name: 'Amber',
+        last_initial:'J',
+        address: '123 Palm st.',
+        bill: 50.00,
+        tip:5.00,
+        user: 'contributer7',
+        post: 'friendly and tipped cash'
+    },
 
 ]
 
@@ -48,10 +58,10 @@ const handleSearchChange = (e) => {
     <header>
         <div className='loginHeader'>
             <div>
-            <h3><span className='Tipper'>Tipper</span> {user ? <Link className='userHeader' to='*'><span className='divider'>|</span> {user}</Link> : ''}</h3>
+            <h3><span className='tipper'>Tipper</span> {user ? <Link className='userHeader' to='*'><span className='divider'>|</span> <span className='user'>{user}</span></Link> : ''}</h3>
             </div>
             <div>
-            {isLoggedIn?<Link to='*'><h3>Logout</h3></Link> : <Link to='*'><h3>Login/Sign-up</h3></Link> }
+            {isLoggedIn?<Link to='*'><h4 className='logoutLogin'>Logout</h4></Link> : <Link to='*'><h4 className='logoutLogin'>Login/Sign-up</h4></Link> }
             </div>
         </div>
         <div className='searchBar' >
@@ -65,11 +75,11 @@ const handleSearchChange = (e) => {
     </header>
     <div className='table'>
 
-      <table>
+      <table striped>
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Initial</th>
+            <th>First</th>
+            <th>Last</th>
             <th>Address</th>
             <th>Bill</th>
             <th>Tip</th>
@@ -80,13 +90,13 @@ const handleSearchChange = (e) => {
         <tbody>
           {filteredData.map((item, index) => (
             <tr key={index}>
-              <td>{item.first_name}</td>
-              <td>{item.last_initial}</td>
-              <td>{item.address}</td>
-              <td>${item.bill.toFixed(2)}</td>
-              <td>${item.tip.toFixed(2)}</td>
-              <td>{item.user}</td>
-              <td>{item.post}</td>
+              <td className='value'>{item.first_name}</td>
+              <td className='value'>{item.last_initial}</td>
+              <td className='value'>{item.address}</td>
+              <td className='value'>${item.bill.toFixed(2)}</td>
+              <td className='value'>${item.tip.toFixed(2)}</td>
+              <td className='value'>{item.user}</td>
+              <td className='value'>{item.post}</td>
             </tr>
           ))}
         </tbody>

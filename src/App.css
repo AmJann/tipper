@@ -4,6 +4,24 @@
   color:whitesmoke;
 }
 
+.table{
+  font-family: 'Montserrat', sans-serif;
+  margin-top:2em;
+}
+
+/* .tableContainer{
+  display: flex;
+  align-items: center;
+} */
+
+
+th{
+  padding-left: 1em;
+}
+
+header{
+  padding-top: .5em;
+}
 .loginHeader{
   display:flex;
   justify-content: space-between;
@@ -19,11 +37,11 @@ header{
   justify-content: space-between;
   padding:12.9em;
 }
-.table{
+/* .table{
   display:flex;
   justify-content: center;
   margin-top: 3.23em;
-}
+} */
 .searchBar{
   display: flex;
   justify-content: center;
@@ -44,6 +62,19 @@ header{
   color:black;
 }
 
+.logoutLogin:hover{
+  color: whitesmoke;
+}
+
+.noDec{
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  color:black;
+}
+
+.add:hover{
+  font-size: 22.5px;
+}
 
 .user:hover{
   color: whitesmoke;
@@ -57,11 +88,4 @@ header{
   padding:1em;
 }
 
-/* .row{
-  display:flex;
-  flex-direction: row;
-} */
 
-.row:hover{
-  background-color: lightslategray;
-}

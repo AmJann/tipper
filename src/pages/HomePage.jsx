@@ -1,6 +1,8 @@
 import { React, useState } from 'react'
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
+import AddForm from './AddForm';
 
 function HomePage() {
     const [user,setUser] = useState('contributer7')
@@ -61,7 +63,7 @@ const handleSearchChange = (e) => {
             <h3><span className='tipper'>Tipper</span> {user ? <Link className='userHeader' to='*'><span className='divider'>|</span> <span className='user'>{user}</span></Link> : ''}</h3>
             </div>
             <div>
-            {isLoggedIn?<Link to='*'><h4 className='logoutLogin'>Logout</h4></Link> : <Link to='*'><h4 className='logoutLogin'>Login/Sign-up</h4></Link> }
+            {isLoggedIn?<Link className='logoutLogin' to='*'><h4>Logout</h4></Link> : <Link className='logoutLogin' to='*'><h4>Login/Sign-up</h4></Link> }
             </div>
         </div>
         <div className='searchBar' >
@@ -73,9 +75,10 @@ const handleSearchChange = (e) => {
       />
       </div>
     </header>
+<div className='tableContainer'>
     <div className='table'>
 
-      <table striped>
+      <Table striped>
         <thead>
           <tr>
             <th>First</th>
@@ -100,14 +103,16 @@ const handleSearchChange = (e) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
+</div>
 <div className='reviewPaginationFooter'>
     <div>
-        <Link to='*'>Add Review</Link>
+        <h5 ><Link className='noDec add' to='*'>Add Review</Link></h5>
     </div>
-    <div>pagination</div>
+    <div><h5 className='noDec'>pagination</h5></div>
 </div>
+<AddForm />
 </div>
   )
 }

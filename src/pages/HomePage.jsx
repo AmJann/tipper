@@ -66,8 +66,9 @@ const handleSearchChange = (e) => {
             {isLoggedIn?<Link className='logoutLogin' to='*'><h4>Logout</h4></Link> : <Link className='logoutLogin' to='*'><h4>Login/Sign-up</h4></Link> }
             </div>
         </div>
-        <div className='searchBar' >
+        <div className='searchBarContainer' >
         <input
+        className='searchBar'
         type="text"
         placeholder="Search by Address"
         value={searchTerm}
@@ -108,11 +109,10 @@ const handleSearchChange = (e) => {
 </div>
 <div className='reviewPaginationFooter'>
     <div>
-        <h5 ><Link className='noDec add' to='*'>Add Review</Link></h5>
+        <h5 ><Link className='noDec add' to='add'>Add Review</Link></h5>
     </div>
     <div><h5 className='noDec'>pagination</h5></div>
 </div>
-<AddForm />
 </div>
   )
 }

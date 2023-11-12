@@ -6,6 +6,7 @@
 
 .table{
   font-family: 'Montserrat', sans-serif;
+  color:#255f60;
   margin-top:2em;
 }
 
@@ -28,8 +29,13 @@ header{
   padding:2em;
 }
 header{
-  background-color: rgb(62, 167, 167);
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  /* background-color: #3ea7a7; */
+  background-image: linear-gradient(to bottom right,#255f60, #ade2de);
+  box-shadow: rgba(12, 12, 12, 0.45) 0px 15px 10px -10px;
+}
+
+tr{
+  color:#255f60;
 }
 
 .reviewPaginationFooter{
@@ -42,24 +48,29 @@ header{
   justify-content: center;
   margin-top: 3.23em;
 } */
-.searchBar{
+.searchBarContainer{
   display: flex;
   justify-content: center;
   padding-bottom: 1em;
   border-radius: 4px;
+
+}
+.searchBar{
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: .5px solid #ade2de;
+  border-radius: 4px;
 }
 
 .userHeader{
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
-  color:black;
+  color:#ade2de
 }
 
 .logoutLogin{
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
-  color:black;
+  color:#d6f1ee
 }
 
 .logoutLogin:hover{
@@ -72,8 +83,13 @@ header{
   color:black;
 }
 
+.add{
+  color:#255f60;
+}
+
 .add:hover{
   font-size: 22.5px;
+  
 }
 
 .user:hover{
@@ -86,6 +102,13 @@ header{
 
 .value{
   padding:1em;
+}
+
+/* add component */
+
+.address{
+  color: rgb(62, 167, 167);
+  font-family: 'Montserrat', sans-serif;
 }
 
 

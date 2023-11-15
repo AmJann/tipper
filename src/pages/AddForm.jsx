@@ -1,10 +1,10 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import CurrencyInput from 'react-currency-input-field';
-const user = 'admin';
+const user = 1;
 function AddForm() {
 const [address, setAddress] = useState('')
 const [value, setValue] = useState();
-const [value2, setValue2] = useState();
+const [value2, setValue2] = useState(8.00);
 const [inputs,setInputs] = useState({
     address:'',
     first_name: '',
@@ -16,6 +16,7 @@ const [inputs,setInputs] = useState({
 })
 const [review, setReview] = useState({
 })
+const [posts, setPosts] = useState([]);
 
 
 const handleAddressSubmit = (e)=>{
@@ -32,7 +33,7 @@ const handleInputChange = (e) => {
 
 const handleReviewSubmit = async (e) => {
   e.preventDefault();
-
+  
   console.log(JSON.stringify({
     address: inputs.address,
     first_name: inputs.first_name,
@@ -40,11 +41,11 @@ const handleReviewSubmit = async (e) => {
     tip: parseFloat(value),
     bill: parseFloat(value2),
     post: inputs.comment,
-    user:user
+    user:parseInt(user)
 }))
   const url = process.env.REACT_APP_API_URL;
   const fullUrl = `${url}/post-list/`;
-  setValue2(8.00)
+  
   try {
       const response = await fetch(fullUrl, {
           method: 'POST',
@@ -58,7 +59,7 @@ const handleReviewSubmit = async (e) => {
             bill: parseFloat(value2),
             tip: parseFloat(value),
             post: inputs.comment,
-            user:user
+            user:parseInt(user)
           }),
       });
 
@@ -75,7 +76,23 @@ const handleReviewSubmit = async (e) => {
   }
 };
 
+useEffect(() => {
+  const url = process.env.REACT_APP_API_URL;
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(`${url}/post-list`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+      }
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error('Error fetching posts:', error.message);
+    }
+  };
 
+  fetchPosts();
+}, [posts]);
 
 
 
@@ -104,29 +121,29 @@ const handleOnValueChange = (value, _)=> {
     
 
   };
-  const limit2 = 100000;
-  const handleOnValueChange2 = (value2, _)=> {
+  // const limit2 = 100000;
+  // const handleOnValueChange2 = (value2, _)=> {
   
 
-    if (!value2) {
-      setValue2('');
-      return;
-    }
+  //   if (!value2) {
+  //     setValue2('');
+  //     return;
+  //   }
 
-    if (Number.isNaN(Number(value2))) {
-      return;
-    }
+  //   if (Number.isNaN(Number(value2))) {
+  //     return;
+  //   }
 
-    if (Number(value2) > limit2) {
-      setValue2(value2);
-      return;
-    }
+  //   if (Number(value2) > limit2) {
+  //     setValue2(value2);
+  //     return;
+  //   }
 
 
-    setValue(value2);
+  //   setValue(value2);
     
 
-  };
+  // };
 
   return (
     <div>
@@ -160,7 +177,7 @@ const handleOnValueChange = (value, _)=> {
                 id="validationCustom02"
                 name="field2"
                 value={value2}
-                onValueChange={handleOnValueChange2}
+                onValueChange={handleOnValueChange}
                 placeholder="Bill"
                 prefix='$'
                 step={2}
@@ -173,6 +190,11 @@ const handleOnValueChange = (value, _)=> {
                 <button type='submit'>Submit Review</button>
             </div>
         </form>
+        <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.post}</li>
+        ))}
+      </ul>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
@@ -6,51 +6,32 @@ import AddForm from './AddForm';
 
 function HomePage() {
     const [user,setUser] = useState('contributer7')
+    const [posts,setPosts] = useState()
     const [isLoggedIn, setIsLoggedIn] =useState(true)
     const [searchTerm, setSearchTerm] = useState('');
+   
 
-let data = [
-    {
-        first_name: 'Amber',
-        last_initial:'J',
-        address: '123 Music st.',
-        bill: 50.00,
-        tip:5.00,
-        user: 'contributer7',
-        post: 'friendly and tipped cash'
-    },
-    {
-        first_name: 'Emma',
-        last_initial:'B',
-        address: '123 Music st.',
-        bill: 50.00,
-        tip:0.00,
-        user: 'contributer7',
-        post: 'horrible tipper, well she is a baby'
-    },
-    {
-        first_name: 'Emma',
-        last_initial:'B',
-        address: '111 Music st.',
-        bill: 50.00,
-        tip:0.00,
-        user: 'contributer7',
-        post: 'horrible tipper, well she is a baby'  
-    },
-    {
-        first_name: 'Amber',
-        last_initial:'J',
-        address: '123 Palm st.',
-        bill: 50.00,
-        tip:5.00,
-        user: 'contributer7',
-        post: 'friendly and tipped cash'
-    },
-
-]
+    useEffect(() => {
+      const url = process.env.REACT_APP_API_URL;
+    
+      const fetchPosts = async () => {
+        try {
+          const response = await fetch(`${url}/post-list`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch posts');
+          }
+          const data = await response.json();
+          setPosts(data);
+        } catch (error) {
+          console.error('Error fetching posts:', error.message);
+        }
+      };
+    
+      fetchPosts();
+    }, []);
 
 
-const filteredData = data.filter(item => item.address.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredData = posts ? posts.filter(item => item.address.toLowerCase().includes(searchTerm.toLowerCase())) : [];
 
 const handleSearchChange = (e) => {
   setSearchTerm(e.target.value);

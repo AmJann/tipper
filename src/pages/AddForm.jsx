@@ -17,7 +17,16 @@ const [inputs,setInputs] = useState({
 const [review, setReview] = useState({
 })
 const [posts, setPosts] = useState([]);
-
+const resetForm = () => {
+  // Reset the form fields to their initial state
+  setInputs({
+    address: '',
+    first_name: '',
+    last_initial: '',
+    comment: '',
+  });
+  setValue('')
+};
 
 const handleAddressSubmit = (e)=>{
     e.preventDefault();
@@ -66,8 +75,10 @@ const handleReviewSubmit = async (e) => {
       if (response.ok) {
           // Success, handle accordingly
           console.log('Review submitted successfully!');
+          resetForm()
           // You can reset the form or do any other action upon success
-      } else {
+      } 
+      else {
           // Handle errors
           console.error('Failed to submit review:', response.statusText);
       }
@@ -92,7 +103,7 @@ useEffect(() => {
   };
 
   fetchPosts();
-}, [posts]);
+}, []);
 
 
 

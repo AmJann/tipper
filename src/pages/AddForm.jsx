@@ -1,7 +1,9 @@
 import {React, useState, useEffect} from 'react'
 import CurrencyInput from 'react-currency-input-field';
+import Header from '../components/Header';
+
 const user = 1;
-function AddForm() {
+function AddForm({isLoggedIn}) {
 const [address, setAddress] = useState('')
 const [value, setValue] = useState();
 const [value2, setValue2] = useState(8.00);
@@ -18,7 +20,6 @@ const [review, setReview] = useState({
 })
 const [posts, setPosts] = useState([]);
 const resetForm = () => {
-  // Reset the form fields to their initial state
   setInputs({
     address: '',
     first_name: '',
@@ -73,13 +74,10 @@ const handleReviewSubmit = async (e) => {
       });
 
       if (response.ok) {
-          // Success, handle accordingly
           console.log('Review submitted successfully!');
           resetForm()
-          // You can reset the form or do any other action upon success
       } 
       else {
-          // Handle errors
           console.error('Failed to submit review:', response.statusText);
       }
   } catch (error) {
@@ -158,6 +156,7 @@ const handleOnValueChange = (value, _)=> {
 
   return (
     <div>
+      <Header user = {user} isLoggedIn = {isLoggedIn}/>
         {(address ? <h3> Add review for <span className='address'><strong>{address}</strong></span> or set new address to begin review</h3> : <h3>set address then add review</h3>)}
         <form onSubmit={handleAddressSubmit}>
   

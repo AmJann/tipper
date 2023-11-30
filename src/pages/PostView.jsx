@@ -41,6 +41,7 @@ function PostView() {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {post && <h3>{post.date_updated}</h3>}
+      {post && <h3>user: {post.user}</h3>}
       {modFirstName && <h3>{modFirstName}</h3>}
       {post && <h3>{modLastInitial}</h3>}
       {post && <h3>{post.address}</h3>}

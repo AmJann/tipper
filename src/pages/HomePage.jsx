@@ -66,6 +66,7 @@ const handleSearchChange = (e) => {
         </thead>
         <tbody>
           {filteredData.map((item, index) => (
+          
             <tr key={index}>
               <td className='value'>{item.first_name}</td>
               <td className='value'>{item.last_initial}</td>
@@ -73,7 +74,7 @@ const handleSearchChange = (e) => {
               <td className='value'>${item.bill.toFixed(2)}</td>
               <td className='value'>${item.tip.toFixed(2)}</td>
               <td className='value'>{item.user}</td>
-              <td className='value'>{item.post}</td>
+            <Link to={`/post/${item.id}`}><td>View Post</td></Link>
             </tr>
           ))}
         </tbody>

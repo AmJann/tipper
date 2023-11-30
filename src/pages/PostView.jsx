@@ -1,38 +1,52 @@
-import { React, useState, useEffect} from 'react'
-import { useParams, Link} from "react-router-dom";
-
-
-
-
-
+import { React, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Header from '../components/Header';
 
 function PostView() {
-    const [post,setPost] = useState({})
-    const urlParams = useParams()
-    useEffect(() => {
-        const url =
-          process.env.REACT_APP_API_URL + `/post-detail/${urlParams.id}/`;
-        const opts = {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Request-Headers": "Content-Type, Authorization",
-          },
-        };
-    
-        fetch(url, opts)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            return data;
-          })
-          .then((data) => setPost(data));
-      }, []);
+  const [post, setPost] = useState({});
+  const [modFirstName, setModFirstName] = useState('');
+  const [modLastInitial, setModLastInitial] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const urlParams = useParams();
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_API_URL + `/post-detail/${urlParams.id}/`;
+    const opts = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': 'Content-Type, Authorization',
+      },
+    };
+
+    fetch(url, opts)
+      .then((res) => res.json())
+      .then((data) => {
+        setPost(data);
+        setModFirstName(data.first_name?.[0].toUpperCase() + data.first_name?.slice(1));
+        setModLastInitial(data.last_initial?.toUpperCase());
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError('Error fetching post data');
+        setLoading(false);
+      });
+  }, [urlParams.id]);
+
   return (
     <div>
-       {post? <h3>{post.post}</h3>:''}
+      <Header />
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {post && <h3>{post.date_updated}</h3>}
+      {modFirstName && <h3>{modFirstName}</h3>}
+      {post && <h3>{modLastInitial}</h3>}
+      {post && <h3>{post.address}</h3>}
+      {post && <h3>{post.post}</h3>}
     </div>
-  )
+  );
 }
 
-export default PostView
+export default PostView;

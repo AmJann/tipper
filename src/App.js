@@ -10,8 +10,7 @@ function App() {
     <div className="App">
 
       <Routes>
-        <Route path="/" element={<LandingPage />}>
-        </Route>
+        <Route path="/" element={<LandingPage />}></Route>
         <Route index element={<HomePage />} />
         <Route path="add" element={<AddForm />} />
         <Route path="post/:id" element={<PostView />}></Route>

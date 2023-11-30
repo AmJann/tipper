@@ -7,10 +7,10 @@ function Header({isLoggedIn}) {
         <header>
             <div className='loginHeader'>
                 <div>
-                    <h3><span className='tipper'>Tipper</span> {user ? <Link className='userHeader' to='*'><span className='divider'>|</span> <span className='user'>{user}</span></Link> : ''}</h3>
+                    <h3><Link className='noDec' to="/"><span className='tipper'>Tipper</span></Link> {user ? <Link className='userHeader' to='/'><span className='divider'>|</span> <span className='user'>{user}</span></Link> : ''}</h3>
                 </div>
                 <div>
-                    {isLoggedIn?<Link className='logoutLogin' to='*'><h4>Logout</h4></Link> : <Link className='logoutLogin' to='*'><h4>Login/Sign-up</h4></Link> }
+                    {isLoggedIn?<Link className='logoutLogin' to=''><h4>Logout</h4></Link> : <Link className='logoutLogin' to='*'><h4>Login/Sign-up</h4></Link> }
                 </div>
             </div>
         </header>

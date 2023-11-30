@@ -24,7 +24,7 @@ const resetForm = () => {
     address: '',
     first_name: '',
     last_initial: '',
-    comment: '',
+    post: '',
   });
   setValue('')
 };
@@ -50,7 +50,7 @@ const handleReviewSubmit = async (e) => {
     last_initial: inputs.last_initial,
     tip: parseFloat(value),
     bill: parseFloat(value2),
-    post: inputs.comment,
+    post: inputs.post,
     user:parseInt(user)
 }))
   const url = process.env.REACT_APP_API_URL;
@@ -68,7 +68,7 @@ const handleReviewSubmit = async (e) => {
             last_initial: inputs.last_initial,
             bill: parseFloat(value2),
             tip: parseFloat(value),
-            post: inputs.comment,
+            post: inputs.post,
             user:parseInt(user)
           }),
       });
@@ -194,7 +194,7 @@ const handleOnValueChange = (value, _)=> {
               />
             </div>
             <div>
-                <textarea placeholder="Comment" value={inputs.comment} name="comment" onChange={handleInputChange} id="comment" cols="41" rows="5"></textarea>
+                <textarea placeholder="Post" value={inputs.post} name="post" onChange={handleInputChange} id="post" cols="41" rows="5"></textarea>
             </div>
             <div>
                 <button type='submit'>Submit Review</button>

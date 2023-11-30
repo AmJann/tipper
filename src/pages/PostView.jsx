@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
+import CommentForm from '../components/CommentForm';
 
 function PostView() {
   const [post, setPost] = useState({});
@@ -8,6 +9,7 @@ function PostView() {
   const [modLastInitial, setModLastInitial] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [id,setId] = useState();
 
   const urlParams = useParams();
 
@@ -28,6 +30,7 @@ function PostView() {
         setModFirstName(data.first_name?.[0].toUpperCase() + data.first_name?.slice(1));
         setModLastInitial(data.last_initial?.toUpperCase());
         setLoading(false);
+        setId(urlParams.id)
       })
       .catch((error) => {
         setError('Error fetching post data');
@@ -46,6 +49,7 @@ function PostView() {
       {post && <h3>{modLastInitial}</h3>}
       {post && <h3>{post.address}</h3>}
       {post && <h3>{post.post}</h3>}
+      {id && <CommentForm id = {id}/>}
     </div>
   );
 }

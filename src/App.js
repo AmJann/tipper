@@ -4,13 +4,14 @@ import HomePage from './pages/HomePage';
 import AddForm from './pages/AddForm';
 import LandingPage from './pages/LandingPage';
 import PostView from './pages/PostView';
+import Header from './components/Header';
 
 function App() {
   return (
     <div className="App">
-
+      <Header />
       <Routes>
-        <Route path="/" element={<LandingPage />}></Route>
+        {/* <Route path="/" element={<LandingPage />}></Route> */}
         <Route index element={<HomePage />} />
         <Route path="add" element={<AddForm />} />
         <Route path="post/:id" element={<PostView />}></Route>

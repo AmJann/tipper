@@ -40,7 +40,6 @@ function PostView() {
 
   return (
     <div>
-      <Header />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {post && <h3>{post.date_updated}</h3>}

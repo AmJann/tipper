@@ -1,9 +1,12 @@
 import {React, useState, useEffect} from 'react'
 import CurrencyInput from 'react-currency-input-field';
-import Header from '../components/Header';
+import { useNavigate } from "react-router-dom";
+
 
 const user = 1;
 function AddForm({isLoggedIn}) {
+  
+const navigate = useNavigate();
 const [address, setAddress] = useState('')
 const [value, setValue] = useState();
 const [value2, setValue2] = useState(8.00);
@@ -74,15 +77,15 @@ const handleReviewSubmit = async (e) => {
       });
 
       if (response.ok) {
-          console.log('Review submitted successfully!');
-          resetForm()
+        navigate('/')
       } 
       else {
           console.error('Failed to submit review:', response.statusText);
       }
   } catch (error) {
       console.error('Error submitting review:', error.message);
-  }
+  } 
+
 };
 
 useEffect(() => {
@@ -156,7 +159,6 @@ const handleOnValueChange = (value, _)=> {
 
   return (
     <div>
-      <Header user = {user} isLoggedIn = {isLoggedIn}/>
         {(address ? <h3> Add review for <span className='address'><strong>{address}</strong></span> or set new address to begin review</h3> : <h3>set address then add review</h3>)}
         <form onSubmit={handleAddressSubmit}>
   
@@ -183,7 +185,7 @@ const handleOnValueChange = (value, _)=> {
                 prefix='$'
                 step={1}
               />
-                <CurrencyInput
+                {/* <CurrencyInput
                 id="validationCustom02"
                 name="field2"
                 value={value2}
@@ -191,7 +193,7 @@ const handleOnValueChange = (value, _)=> {
                 placeholder="Bill"
                 prefix='$'
                 step={2}
-              />
+              /> */}
             </div>
             <div>
                 <textarea placeholder="Post" value={inputs.post} name="post" onChange={handleInputChange} id="post" cols="41" rows="5"></textarea>

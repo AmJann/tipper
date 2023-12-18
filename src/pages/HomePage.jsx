@@ -39,7 +39,6 @@ const handleSearchChange = (e) => {
 };
   return (
     <div>
-      <Header />
     <div className='searchBarContainer' >
         <input
         className='searchBar'

@@ -112,4 +112,80 @@ tr{
   font-family: 'Montserrat', sans-serif;
 }
 
+/* post comments */
+.userImageContainer{
+  width:15vw;
+  margin-left: 3vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.postAllContainer{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  margin:6em 8em 3em 8em;
+  border-radius: .5em;
+  width:50vw;
+  padding:2em 1.25em;
+}
 
+.userImage{
+  width:100%;
+
+
+}
+
+.userPostContainer{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10vh;
+
+}
+
+.userText{
+  text-align: center;
+  /* color:#255f60; */
+  /* font-family: 'Montserrat', sans-serif;
+  font-weight: 500; */
+}
+
+.editDeleteIcon{
+  width:1.8vw;
+  margin-right: .5em;
+}
+
+.postAllContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0 5vw;
+
+}
+
+.customerSpan{
+  color: rgb(62, 167, 167);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.commentContainer{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  margin:3em 4em;
+  border-radius: .5em;
+  width:30vw;
+  padding:2em 1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.commentAllContainer{
+  display: flex;
+  flex-direction: row;
+  margin:0 2vw;
+}
+
+.userImageComment{
+  width:9.75vw;
+  /* border: 1px solid  rgb(62, 167, 167); */
+  border-radius: 15em;
+  box-shadow:    rgb(62, 167, 167) 0px 6px 12px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}

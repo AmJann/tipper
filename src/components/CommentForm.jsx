@@ -33,8 +33,8 @@ function CommentForm(id) {
             });
       
             if (response.ok) {
+                setComment('');
                 console.log('Comment submitted successfully!');
-                resetForm()
             } 
             else {
                 console.error('Failed to submit comment:', response.statusText);
@@ -43,11 +43,15 @@ function CommentForm(id) {
             console.error('Error submitting comment:', error.message);
         }
       };
+
+      useEffect(() => {
+        console.log('Comment state:', comment);
+      }, [comment]);
   return (
     <div>
         <form onSubmit={handleCommentSubmit}>
             <label>
-                <textarea type='text'placeholder='comment'cols="41" rows="5" onChange={(e) => setComment(e.target.value)}></textarea>
+                <textarea type='text' value={comment} placeholder='comment'cols="41" rows="5" onChange={(e) => setComment(e.target.value)}></textarea>
             </label>
             <button type='submit'>Submit Comment</button>
         </form>

@@ -36,6 +36,15 @@ header{
 
 tr{
   color:#255f60;
+  padding: .5em;
+}
+
+.viewPost{
+  margin-top: .5em;
+}
+
+.viewPost:hover{
+  color:rgb(62, 167, 167);
 }
 
 .reviewPaginationFooter{
@@ -150,7 +159,12 @@ tr{
 
 .editDeleteIcon{
   width:1.8vw;
-  margin-right: .5em;
+  margin-right: .25em;
+  padding-right: .25em;
+}
+
+.editDeleteIcon:hover{
+  width:2vw;
 }
 
 .postAllContainer{
@@ -191,6 +205,11 @@ tr{
 }
 
 .commentForm{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
 
   
 }
@@ -202,7 +221,7 @@ tr{
   border: 1px solid black;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: whitesmoke;
-  margin:2vh 20vw;
+  margin:1vh 20vw 4vh;
 }
 
 .button:hover{

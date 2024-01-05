@@ -48,7 +48,7 @@ function CommentForm(id) {
         console.log('Comment state:', comment);
       }, [comment]);
   return (
-    <div>
+    <div className='commentForm'>
         <form onSubmit={handleCommentSubmit}>
             <div className='commentForm'>
             <label>

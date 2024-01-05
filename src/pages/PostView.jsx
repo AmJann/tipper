@@ -14,6 +14,8 @@ function PostView() {
   const [error, setError] = useState(null);
   const [id,setId] = useState();
   const[comments, setComments] = useState();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 
   const urlParams = useParams();
 
@@ -114,8 +116,8 @@ return (
             <p>{item.comment}</p>
           </div>
           <div className='editDeleteContainer'>
-            <img className='editDeleteIcon' src={edit} alt='edit'></img>
-            <img className='editDeleteIcon' src={deleteIcon} alt='delete'></img>
+            <img title='edit' className='editDeleteIcon' src={edit} alt='edit'></img>
+            <img title='delete' className='editDeleteIcon' src={deleteIcon} alt='delete'></img>
           </div>
         </div>
       </div>

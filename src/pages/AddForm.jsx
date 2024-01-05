@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const user = 1;
 function AddForm({isLoggedIn}) {
-  
+
 const navigate = useNavigate();
 const [address, setAddress] = useState('')
 const [value, setValue] = useState();
@@ -19,18 +19,9 @@ const [inputs,setInputs] = useState({
     post:'',
     user:'',
 })
-const [review, setReview] = useState({
-})
-const [posts, setPosts] = useState([]);
-const resetForm = () => {
-  setInputs({
-    address: '',
-    first_name: '',
-    last_initial: '',
-    post: '',
-  });
-  setValue('')
-};
+
+
+
 
 const handleAddressSubmit = (e)=>{
     e.preventDefault();
@@ -88,23 +79,7 @@ const handleReviewSubmit = async (e) => {
 
 };
 
-useEffect(() => {
-  const url = process.env.REACT_APP_API_URL;
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(`${url}/post-list`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch posts');
-      }
-      const data = await response.json();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts:', error.message);
-    }
-  };
 
-  fetchPosts();
-}, []);
 
 
 
@@ -202,11 +177,6 @@ const handleOnValueChange = (value, _)=> {
                 <button type='submit'>Submit Review</button>
             </div>
         </form>
-        <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.post}</li>
-        ))}
-      </ul>
     </div>
   )
 }

@@ -57,7 +57,6 @@ const handleSearchChange = (e) => {
             <th>First</th>
             <th>Last</th>
             <th>Address</th>
-            <th>Bill</th>
             <th>Tip</th>
             <th>User</th>
             <th>Post</th>
@@ -70,10 +69,9 @@ const handleSearchChange = (e) => {
               <td className='value'>{item.first_name}</td>
               <td className='value'>{item.last_initial}</td>
               <td className='value'>{item.address}</td>
-              <td className='value'>${item.bill.toFixed(2)}</td>
               <td className='value'>${item.tip.toFixed(2)}</td>
               <td className='value'>{item.user}</td>
-            <Link className="noDec value"to={`/post/${item.id}`}><td>View Post</td></Link>
+            <Link className="noDec value viewPost"to={`/post/${item.id}`}><td>View Post</td></Link>
             </tr>
           ))}
         </tbody>

@@ -50,10 +50,13 @@ function CommentForm(id) {
   return (
     <div>
         <form onSubmit={handleCommentSubmit}>
+            <div className='commentForm'>
             <label>
                 <textarea type='text' value={comment} placeholder='comment'cols="41" rows="5" onChange={(e) => setComment(e.target.value)}></textarea>
             </label>
-            <button type='submit'>Submit Comment</button>
+            <br></br>
+            <button className='submitComment button' alt ='submit comment' type='submit'>Submit Comment</button>
+            </div>
         </form>
     </div>
   )

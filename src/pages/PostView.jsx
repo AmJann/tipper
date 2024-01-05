@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentForm from '../components/CommentForm';
 import userIcon from '../images/userIcon.webp'
 import edit from '../images/editPencil.jpeg'
 import deleteIcon from '../images/delete.jpeg'
+import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
 
 function PostView() {
   const [post, setPost] = useState({});
@@ -18,6 +18,13 @@ function PostView() {
 
 
   const urlParams = useParams();
+  const navigate = useNavigate();
+
+  const toggleDeleteModal = () => {
+    console.log('Toggling modal');
+    setShowDeleteModal(!showDeleteModal);
+  };
+  
 
   function formatDateTime(dateTimeString) {
     const options = {
@@ -80,6 +87,27 @@ useEffect(() => {
   fetchComments();
 }, [urlParams.id,comments]);
 
+const handleDeletePost = async () => {
+  try {
+    const url = process.env.REACT_APP_API_URL + `/post-detail/${urlParams.id}/`;
+    const opts = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': 'Content-Type, Authorization',
+      },
+    };
+
+    await fetch(url, opts);
+    // Optionally, you can handle success or navigate back to a post list page.
+  } catch (error) {
+    console.error('Error deleting post:', error.message);
+  }
+
+  navigate('/')
+  toggleDeleteModal();
+};
+
 return (
   <div>
     {loading && <p>Loading...</p>}
@@ -98,8 +126,8 @@ return (
       {post && <p>{post.post}</p>}
       </div>
       <div className='editDeleteContainer'>
-        <img className='editDeleteIcon' src={edit} alt='edit'></img>
-        <img className='editDeleteIcon' src={deleteIcon} alt='delete'></img>
+        <img title="edit" className='editDeleteIcon' src={edit} alt='edit' ></img>
+        <img title="delete" className='editDeleteIcon' src={deleteIcon} alt='delete'   onClick={() => toggleDeleteModal()}></img>
       </div>
 
       </div>
@@ -123,6 +151,13 @@ return (
       </div>
     ))}
     {id && <CommentForm id={id} />}
+    {showDeleteModal && (
+  <DeleteConfirmationModal
+    isOpen={showDeleteModal}
+    onClose={toggleDeleteModal}
+    onDelete={handleDeletePost} // Implement this function
+  />
+)}
   </div>
 );
 }

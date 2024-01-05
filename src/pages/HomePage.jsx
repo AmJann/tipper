@@ -71,7 +71,7 @@ const handleSearchChange = (e) => {
               <td className='value'>{item.address}</td>
               <td className='value'>${item.tip.toFixed(2)}</td>
               <td className='value'>{item.user}</td>
-            <Link className="noDec value viewPost"to={`/post/${item.id}`}><td>View Post</td></Link>
+              <td><Link className="noDec value viewPost"to={`/post/${item.id}`}>View Post</Link></td>
             </tr>
           ))}
         </tbody>

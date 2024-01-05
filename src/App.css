@@ -50,7 +50,7 @@ tr{
 .reviewPaginationFooter{
   display:flex;
   justify-content: space-between;
-  padding:12.9em;
+  padding:5em 12.9em;
 }
 /* .table{
   display:flex;
@@ -273,4 +273,26 @@ align-items: center;
 
 .redText{
   color:rgb(219, 7, 7);
+}
+
+.edit-post-form {
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.editInputForm,
+.editTextForm {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }

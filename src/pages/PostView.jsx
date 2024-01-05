@@ -5,6 +5,8 @@ import userIcon from '../images/userIcon.webp'
 import edit from '../images/editPencil.jpeg'
 import deleteIcon from '../images/delete.jpeg'
 import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
+import DeleteCommentModal from '../components/DeleteCommentModal'
+import EditPostForm from '../components/EditPostForm'
 
 function PostView() {
   const [post, setPost] = useState({});
@@ -15,10 +17,46 @@ function PostView() {
   const [id,setId] = useState();
   const[comments, setComments] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedPost, setEditedPost] = useState(null);
 
 
   const urlParams = useParams();
   const navigate = useNavigate();
+
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const toggleDeleteCommentModal = (commentId) => {
+    setSelectedCommentId(commentId);
+    setShowDeleteCommentModal(!showDeleteCommentModal);
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      // Implement the comment deletion logic using the appropriate API route
+      const commentUrl = process.env.REACT_APP_API_URL + `/comment-detail/${commentId}/`;
+      const commentOpts = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': 'Content-Type, Authorization',
+        },
+      };
+
+      await fetch(commentUrl, commentOpts);
+      // Optionally, you can handle success or refresh the comment list.
+    } catch (error) {
+      console.error('Error deleting comment:', error.message);
+    }
+
+    // Close the modal after deletion
+    toggleDeleteCommentModal();
+  };
+
 
   const toggleDeleteModal = () => {
     console.log('Toggling modal');
@@ -119,14 +157,24 @@ return (
           {post && <p className='userText'>{formatDateTime(post.date_updated)}</p>}
         </div>
       <div className='postAllContainer'>
-        <div className='postContainer'>
-      {modFirstName && <h3><span className='customerSpan'>Customer:</span> {modFirstName} {modLastInitial}</h3>}
-      {post && <h6>{post.address}</h6>}
-      {post && <h6><span className='customerSpan'>Tip: </span>${post.tip}</h6>}
-      {post && <p>{post.post}</p>}
-      </div>
+      <div className="postContainer">
+            {isEditing ? (
+              <EditPostForm post={post} onCancel={toggleEditMode} onUpdatePost={setPost} />
+            ) : (
+              <>
+                {modFirstName && (
+                  <h3>
+                    <span className="customerSpan">Customer:</span> {modFirstName} {modLastInitial}
+                  </h3>
+                )}
+                {post && <h6>{post.address}</h6>}
+                {post && <h6><span className="customerSpan">Tip: </span>${post.tip}</h6>}
+                {post && <p>{post.post}</p>}
+              </>
+            )}
+          </div>
       <div className='editDeleteContainer'>
-        <img title="edit" className='editDeleteIcon' src={edit} alt='edit' ></img>
+        <img title="edit" className='editDeleteIcon' src={edit} alt='edit' onClick={() => toggleEditMode()}></img>
         <img title="delete" className='editDeleteIcon' src={deleteIcon} alt='delete'   onClick={() => toggleDeleteModal()}></img>
       </div>
 
@@ -145,7 +193,7 @@ return (
           </div>
           <div className='editDeleteContainer'>
             <img title='edit' className='editDeleteIcon' src={edit} alt='edit'></img>
-            <img title='delete' className='editDeleteIcon' src={deleteIcon} alt='delete'></img>
+            <img title='delete' className='editDeleteIcon' src={deleteIcon} alt='delete' onClick={() => toggleDeleteCommentModal(item.id)}></img>
           </div>
         </div>
       </div>
@@ -157,7 +205,16 @@ return (
     onClose={toggleDeleteModal}
     onDelete={handleDeletePost} // Implement this function
   />
+  
 )}
+    {showDeleteCommentModal && (
+  <DeleteCommentModal
+    isOpen={showDeleteCommentModal}
+    onClose={toggleDeleteCommentModal}
+    onDelete={handleDeleteComment}
+    commentId={selectedCommentId}
+  />
+  )}
   </div>
 );
 }
